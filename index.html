@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DI template - 20160520</title>
+    <meta name=viewport content="width=device-width initial-scale=1">
+    <link href="http://cartodb.com/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="./themes/css/deep-insights.css" />
+    <link rel="stylesheet" href="./themes/css/myapp.css" />
+    <script src="./scripts/deep-insights.uncompressed.js"></script>
+    <script src="./scripts/myapp.js"></script>
+</head>
+
+<body>
+
+    <!--    Dashboard container -->
+    <div class="Dashboard-canvas" id="dashboard"></div>
+
+    <!--    Custom widget -->
+    <div id='mywidget'>
+        <div class="CDB-Widget CDB-Widget--light">
+            <div class="CDB-Loader"></div>
+            <div class="CDB-Widget-error is-hidden">
+                <button class="CDB-Widget-button CDB-Widget-errorButton js-refresh"> <span class="CDB-Widget-textSmall CDB-Widget-textSmall--bold">REFRESH</span> </button>
+            </div>
+            <div class="CDB-Widget-body">
+                <div class="CDB-Widget-header js-header">
+                    <div class="CDB-Widget-title CDB-Widget-contentSpaced">
+                        <h3 class="CDB-Text CDB-Size-large u-ellipsis js-title">I'm a custom widget</h3>
+                        <br>
+                    </div>
+                </div>
+                <div class="CDB-Widget-content">
+                    Whatever!
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

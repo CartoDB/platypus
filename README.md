@@ -111,4 +111,4 @@ myapp.widgetsdata[4].filter.acceptedCategories.toJSON().map(function(a){return a
 myapp.widgetsdata[4].filter.accept(["Arts", "Education and Society"]);
 ```
 
-* In category widgets, the aggregation column param shuld be `aggregation_column` instead of `aggregationColumn` to work.
+* In category widgets, the aggregation column param should be `aggregation_column` instead of `aggregationColumn` to work.

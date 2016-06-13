@@ -6,17 +6,6 @@ Named maps need a diferent piping and are not this straightforward.
 
 # Tips:
 
-* jQuery, Underscore, Leaflet... now reside within the `cdb` namespace:
-```javascript
-cdb.$.
-cdb._.
-cdb.Backbone.
-cdb.d3.
-cdb.L.
-cdb.LZMA.
-cdb.Mustache.
-```
-
 * Add widgets to layer #1, using the options described [here](https://github.com/CartoDB/deep-insights.js/blob/master/doc/api.md)
 ```javascript
 myapp.addWidget('category', 1, {

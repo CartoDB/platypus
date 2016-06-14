@@ -64,7 +64,7 @@
             myapp.addWidget = function (type, layer_index, options) {
                 try {
                     var layer = myapp.layers[layer_index];
-                    switch (w.type) {
+                    switch (type) {
                     case 'category':
                         dashboard.createCategoryWidget(options, layer);
                         break;

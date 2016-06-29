@@ -90,6 +90,17 @@ Object.keys(myapp.widgets[1]._events)
 Object.keys(myapp.widgetsdata[1]._events)
 ```
 
+* Get/Set the selected categories of a given histogram/time-series widget
+
+```javascript
+// get
+myapp.widgetsdata[4].filter.get('min')
+myapp.widgetsdata[4].filter.get('max')
+
+// set
+myapp.widgetsdata[4].filter.setRange(min_val,max_val)
+```
+
 * Get/Set the selected categories of a given category widget
 
 ```javascript

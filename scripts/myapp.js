@@ -18,7 +18,7 @@
             sql_api_template: "https://{user}.cartodb.com:443"
         });
 
-        cartodb.deepInsights.createDashboard('#dashboard', diJSON, {
+        myapp.dashboard = cartodb.deepInsights.createDashboard('#dashboard', diJSON, {
             no_cdn: false
         }, function (err, dashboard) {
 
@@ -32,6 +32,7 @@
             myapp.layers = myapp.map.getLayers();
 
             // if the layer has an analysis node, its SQL is not exposed in the API
+            // WARNING: this will be modified in upcoming iterations
             myapp.layers.map(function (a) {
                 var tmp;
                 if (a.attributes.sql == void 0) {
@@ -47,13 +48,15 @@
                 return a;
             });
 
+            // Array of widgets views
+            myapp.widgets = dashboard.getWidgets();
+
             // Array of widgets’ data models
-            myapp.widgetsdata = dashboard.getWidgets().map(function (a) {
+            myapp.widgetsdata = myapp.widgets.map(function (a) {
                 return a.dataviewModel
             });
 
-            // Array of widgets views
-            myapp.widgets = dashboard.getWidgets();
+
 
             // retrieve the widgets container so we can add a custom one if needed
             myapp.wcontainer = cdb.$('#' + vis.$el.context.id + ' .CDB-Widget-canvasInner').get(0);
@@ -78,10 +81,23 @@
                         dashboard.createTimeSeriesWidget(options, layer);
                         break;
                     }
+                    myapp.widgets = dashboard.getWidgets();
+                    myapp.widgetsdata = myapp.widgets.map(function (a) {
+                        return a.dataviewModel
+                    });
                     return 'OK';
                 } catch (error) {
                     return error;
                 }
+            }
+
+            /* Function to remove widgets based on the index in myapp.widgets array */
+            myapp.removeWidget = function (index) {
+                myapp.widgets[index].remove();
+                myapp.widgets = dashboard.getWidgets();
+                myapp.widgetsdata = myapp.widgets.map(function (a) {
+                    return a.dataviewModel
+                });
             }
 
             /*

@@ -90,7 +90,7 @@ Object.keys(myapp.widgets[1]._events)
 Object.keys(myapp.widgetsdata[1]._events)
 ```
 
-* Get/Set the selected categories of a given histogram/time-series widget
+* Get/Set the selected bins of a given histogram/time-series widget
 
 ```javascript
 // get

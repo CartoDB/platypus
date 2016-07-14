@@ -286,7 +286,7 @@ And then, you can inject it in the dashboard, in the order you like. v.G. : the 
 myapp.wcontainer.insertBefore(document.querySelector('#mywidget'), myapp.wcontainer.children[0]);
 ```
 
-The file result should look like this [.js file](.workshop/myapp.js) based on the common template.
+The .js file result should look like this [.js file](./workshop/myapp.js) based on the common template, and the .html should be like [this one](./workshop/index.html).
 
 
 

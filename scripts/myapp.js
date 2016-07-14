@@ -5,7 +5,7 @@
     window.onload = function () {
 
         // the URL to your viz.json
-        var diJSON = 'https://team.cartodb.com/u/solutions/api/v3/viz/c008997c-f04e-11e5-bdf9-0ecd1babdde5/viz.json';
+        var diJSON = 'https://team.cartodb.com/u/solutions/api/v3/viz/9282d09e-32e8-11e6-bf08-0e787de82d45/viz.json';
 
 
         var username = diJSON.match(/\/u\/(.+)\/api\/v\d\/|:\/\/(.+)\.cartodb\.com\/api/i)[1],
@@ -18,15 +18,20 @@
             sql_api_template: "https://{user}.cartodb.com:443"
         });
 
-        myapp.dashboard = cartodb.deepInsights.createDashboard('#dashboard', diJSON, {
+        cartodb.deepInsights.createDashboard('#dashboard', diJSON, {
             no_cdn: false
         }, function (err, dashboard) {
+
+            myapp.dashboard = dashboard;
 
             // DI map
             myapp.map = dashboard.getMap();
 
+            // CDB map to add layers and so
+            myapp.Cmap = myapp.map.map;
+
             // Leaflet map object
-            myapp.Lmap = myapp.map.getNativeMap();
+            //myapp.Lmap = myapp.map.getNativeMap();
 
             // CartoDB layers
             myapp.layers = myapp.map.getLayers();
@@ -56,13 +61,22 @@
                 return a.dataviewModel
             });
 
-
-
             // retrieve the widgets container so we can add a custom one if needed
-            myapp.wcontainer = cdb.$('#' + vis.$el.context.id + ' .CDB-Widget-canvasInner').get(0);
+             myapp.wcontainer = cdb.$('#' + dashboard._dashboard.dashboardView.$el.context.id + ' .CDB-Widget-canvasInner').get(0);
+
+            // Nodes
+            // https://github.com/CartoDB/Windshaft-cartodb/blob/8942c72fb21f681863b78ac61a22fca35d43da55/docs/MapConfig-Analyses-extension.md
+            // https://github.com/CartoDB/camshaft/blob/0.8.0/reference/versions/0.7.0/reference.json
+            myapp.nodes = dashboard._dashboard.vis._analysisCollection.models;
+            // function to add nodes
+            myapp.addNode = function(options){
+                return myapp.map.analysis.analyse(options);
+            }
+
 
             /* function to add widgets
              * The options are described at: https://github.com/CartoDB/deep-insights.js/blob/master/doc/api.md
+             * BONUS: "sourceId" option lets you bound a widget to a node instead a of a layer ---> sourceId: mynode.id
              */
             myapp.addWidget = function (type, layer_index, options) {
                 try {
@@ -105,6 +119,8 @@
              *       whatever
              *
              */
+
+             myapp.addWidget('category',2, {column:'etiqueta', title:'new widget'})
 
         });
     }

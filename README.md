@@ -4,11 +4,18 @@ Full template to make DI dashboards easily with public maps/datasets.
 
 Named maps need a diferent piping and are not this straightforward.
 
+Check the [tiny workshop](./workshop.md) for further info.
+
 # Tips:
+
+* For simplicity and elegance sake: **DO NOT CODE JavaScript OR CSS WITHIN THE HTML** (unless it is a matter of death and live). Use .js and .css files instead. You will find samples here to start with. Please forget everything about `<script>` and `<style>` tags.
+
+* window.vis == myapp.map
 
 * Add widgets to layer #1, using the options described [here](https://github.com/CartoDB/deep-insights.js/blob/master/doc/api.md)
 ```javascript
 myapp.addWidget('category', 1, {
+    "source": {"id":'a0'},
   "title": "Metro line",
   "column": "closest_metro_line",
   "aggregation": "count"
@@ -24,22 +31,20 @@ myapp.wcontainer.insertBefore(document.querySelector('#mywidget'), myapp.wcontai
 where the widget is defined in the HTML like
 
 ```html
-<div id='mywidget'>
-    <div class="CDB-Widget CDB-Widget--light">
-        <div class="CDB-Loader"></div>
-        <div class="CDB-Widget-error is-hidden">
-            <button class="CDB-Widget-button CDB-Widget-errorButton js-refresh"> <span class="CDB-Widget-textSmall CDB-Widget-textSmall--bold">REFRESH</span> </button>
+<div class="CDB-Widget CDB-Widget--light" id='mywidget'>
+    <div class="CDB-Loader"></div>
+    <div class="CDB-Widget-error is-hidden">
+        <button class="CDB-Widget-button CDB-Widget-errorButton js-refresh"> <span class="CDB-Widget-textSmall CDB-Widget-textSmall--bold">REFRESH</span> </button>
+    </div>
+    <div class="CDB-Widget-body">
+        <div class="CDB-Widget-header js-header">
+            <div class="CDB-Widget-title CDB-Widget-contentSpaced">
+                <h3 class="CDB-Text CDB-Size-large u-ellipsis js-title">I'm a custom widget</h3>
+                <br>
+            </div>
         </div>
-        <div class="CDB-Widget-body">
-            <div class="CDB-Widget-header js-header">
-                <div class="CDB-Widget-title CDB-Widget-contentSpaced">
-                    <h3 class="CDB-Text CDB-Size-large u-ellipsis js-title">Title</h3>
-                    <br>
-                </div>
-            </div>
-            <div class="CDB-Widget-content">
-                Content
-            </div>
+        <div class="CDB-Widget-content">
+            <div class="CDB-Text CDB-Size-medium u-ellipsis">Whatever!</div>
         </div>
     </div>
 </div>
@@ -51,6 +56,7 @@ It will be visible only if there is at least one native widget present
 
 ```javascript
 vis.map.createCartoDBLayer({
+        "source": 'a0',
       "type": "CartoDB",
       "cartocss": "#populated_places{marker-fill-opacity: 0.9;marker-line-width: 0;marker-line-opacity: 1;marker-placement: point;marker-type: ellipse;marker-width: 2;marker-fill: #FFFFFF;marker-allow-overlap: true;}",
       "sql": "select * from populated_places"

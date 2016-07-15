@@ -198,14 +198,12 @@ myapp.addNode({
 
 ### 6. Layers
 
-Let's add a layer, so we can start playing. Take into account that, even using a source node, you need to specify the sql again:
+Let's add a layer, so we can start playing:
 
 ```javascript
 myapp.Cmap.createCartoDBLayer({
     "source": 'a0',
     "name": 'Airports',
-    "type": "CartoDB",
-    "sql": 'SELECT * FROM abel.airports',
     "cartocss": '#layer{marker-comp-op:lighten;marker-line-width:0;marker-line-color:#FFF;marker-line-opacity:1;marker-width:10;marker-fill:ramp([elevation_ft],(#5c53a5,#a059a0,#ce6693,#eb7f86,#f8a07e,#fac484,#f3e79b),quantiles);marker-fill-opacity:.8;marker-allow-overlap:true;}'
 });
 ```
